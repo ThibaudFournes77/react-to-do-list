@@ -14,9 +14,13 @@ function Task(props) {
       <div className="task__content">
         <p className="task__label">{props.libelle}</p>
         <p className={`task__priority task__priority-${props.priority}`}>{props.priority}</p>
-        <input type="text" className="task__input" placeholder="Modifier l'intitulé..." />
+        {
+          !isDone && <input type="text" className="task__input" placeholder="Modifier l'intitulé..." />
+        }
       </div>
-      <button type="button" className="task__button" onClick={handleClick}>Fini !</button>
+      {
+        !isDone && <button type="button" className="task__button" onClick={handleClick}>Fini !</button>
+      }
     </li>
   );
 }
