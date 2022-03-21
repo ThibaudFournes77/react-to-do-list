@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function Task(props) {
+  const [isDone, setIsDone] = useState(props.isDone);
+
+  const handleClick = () => {
+    setIsDone(true);
+  }
+
   return (
     <li className="task">
       <div className="task__content">
@@ -8,7 +14,7 @@ function Task(props) {
         <p className={`task__priority task__priority-${props.priority}`}>{props.priority}</p>
         <input type="text" className="task__input" placeholder="Modifier l'intitulé..." />
       </div>
-      <button type="button" className="task__button">Fini !</button>
+      <button type="button" className="task__button" onClick={handleClick}>Fini !</button>
     </li>
   );
 }
