@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 function Form() {
   const [taskLibelle, setTaskLibelle] = useState('');
   const [taskPriority, setTaskPriority] = useState('low');
+  const [taskIsDone, setTaskIsDone] = useState(false);
 
   const handleTaskLibelleChange = (e) => {
     setTaskLibelle(e.target.value);
@@ -10,6 +11,10 @@ function Form() {
 
   const handleTaskPriorityChange = (e) => {
     setTaskPriority(e.target.value);
+  }
+
+  const handleTaskIsDone = () => {
+    setTaskIsDone(!taskIsDone);
   }
 
   return (
@@ -30,7 +35,7 @@ function Form() {
         </div>
         <div className="form__field">
           <label htmlFor="task-done" className="form__label">Finie</label>
-          <input type="checkbox" id="task-done" />
+          <input type="checkbox" id="task-done" checked={taskIsDone} onChange={handleTaskIsDone} />
         </div>
       <button type="submit" className="form__submit">Ajouter</button>
 	  </div>
