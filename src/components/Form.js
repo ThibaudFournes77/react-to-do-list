@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function Form() {
+function Form(props) {
   const [taskLibelle, setTaskLibelle] = useState('');
   const [taskPriority, setTaskPriority] = useState('low');
   const [taskIsDone, setTaskIsDone] = useState(false);
@@ -17,8 +17,13 @@ function Form() {
     setTaskIsDone(!taskIsDone);
   }
 
+  const handleSubmit = (e) => {
+    props.addTask(taskLibelle, taskPriority, taskIsDone);
+    e.preventDefault();
+  }
+
   return (
-    <form className="form">
+    <form className="form" onSubmit={handleSubmit}>
 	    <h2 className="form__title">Ajouter une tâche</h2>
 	    <div className="form__fields">
         <div className="form__field">

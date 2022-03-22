@@ -8,6 +8,22 @@ async function getTasks() {
   return tasks.data;
 }
 
+const getIdForNewTask = (tasks) => {
+  const tasksIds = tasks.map(task => task.id);
+  return tasksIds.reduce((a, c) => {
+    return Math.max(a, c);
+  }) + 1;
+}
+
+const getNewTask = (taskLibelle, taskPriority, taskIsDone, id) => {
+  return {
+    id: id,
+    libelle: taskLibelle,
+    priority: taskPriority,
+    isDone: taskIsDone,
+  };
+}
+
 function App() {
   const [tasks, setTasks] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -18,6 +34,11 @@ function App() {
 	  setLoading(false);
   }, []);
   
+  const addTask = (taskLibelle, taskPriority, taskIsDone) => {
+    const newId = getIdForNewTask(tasks);
+    const newTask = getNewTask(taskLibelle, taskPriority, taskIsDone, newId);
+    setTasks([newTask, ...tasks]);
+  }
 
   return (
     <div>
@@ -26,7 +47,7 @@ function App() {
           <p>Patience...</p>
         ) : (
           <>
-            <Form />
+            <Form addTask={addTask} />
             <TasksList tasks={tasks} />
           </>
         )
