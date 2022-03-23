@@ -40,6 +40,19 @@ function App() {
     setTasks([newTask, ...tasks]);
   }
 
+  const onClickTaskDone = (idTaskToUpdate) => {
+    const updatedTasks = tasks.map(task => {
+      if (task.id === idTaskToUpdate) {
+        return {
+          ...task,
+          isDone: !task.isDone,
+        }
+      }
+      return task;
+    });
+    setTasks(updatedTasks);
+  }
+
   return (
     <div>
       {loading ?
@@ -48,7 +61,7 @@ function App() {
         ) : (
           <>
             <Form addTask={addTask} />
-            <TasksList tasks={tasks} />
+            <TasksList tasks={tasks} onClickTaskDone={onClickTaskDone} />
           </>
         )
       }

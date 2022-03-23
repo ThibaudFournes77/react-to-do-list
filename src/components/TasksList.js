@@ -1,11 +1,20 @@
 import React from 'react';
 import Task from './Task';
 
-function TasksList({tasks}) {
+function TasksList({tasks, onClickTaskDone}) {
   return (
     <ul>
       {
-        tasks.map((task) => <Task key={task.id} libelle={task.libelle} priority={task.priority} isDone={task.isDone} />)
+        tasks.map((task) => (
+          <Task
+            key={task.id}
+            id={task.id}
+            libelle={task.libelle}
+            priority={task.priority}
+            isDone={task.isDone}
+            onClickTaskDone={onClickTaskDone}
+          />
+        ))
       }
     </ul>
   );
